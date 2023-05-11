@@ -14,6 +14,7 @@ class PetDatabase:
     def add_pet(self, name, age):
         self.pets.append(Pet(name, age))
         print("Pet added successfully.")
+
     def show_pets(self, pets=None):
         if not pets:
             pets = self.pets
@@ -23,16 +24,18 @@ class PetDatabase:
         for i, pet in enumerate(pets):
             print(f"| {i:<3} {pet}")
         print("+------------------------+")
+
+
 Database = PetDatabase()
 
 while True:
     print("\nWhat would you like to do?")
     print("1. View all pets")
     print("2. Add more pets")
-    print("7. Exit Program")
-    choice = input("Enter your choice (1-7): ")
+    print("3. Exit Program")
+    choice = input("Enter your choice (1-3): ")
     if choice == "1":
-        DataBase.show_pets()
+        Database.show_pets()
     elif choice == "2":
         petCount = 0
         while True:
@@ -47,7 +50,8 @@ while True:
 
                 break
         print(f"{petCount} pets added")
-    elif choice == "7":
+    elif choice == "3":
+        print("Goodbye!")
         break
     else:
         print("Invalid choice. Please try again.")
