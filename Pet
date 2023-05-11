@@ -1,0 +1,53 @@
+class Pet:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"| {self.name:<10} | {self.age:<4}|"
+
+
+class PetDatabase:
+    def __init__(self):
+        self.pets = []
+
+    def add_pet(self, name, age):
+        self.pets.append(Pet(name, age))
+        print("Pet added successfully.")
+    def show_pets(self, pets=None):
+        if not pets:
+            pets = self.pets
+        print("+------------------------+")
+        print("| ID  | NAME       | AGE |")
+        print("+------------------------+")
+        for i, pet in enumerate(pets):
+            print(f"| {i:<3} {pet}")
+        print("+------------------------+")
+Database = PetDatabase()
+
+while True:
+    print("\nWhat would you like to do?")
+    print("1. View all pets")
+    print("2. Add more pets")
+    print("7. Exit Program")
+    choice = input("Enter your choice (1-7): ")
+    if choice == "1":
+        DataBase.show_pets()
+    elif choice == "2":
+        petCount = 0
+        while True:
+            pet = input("add pet(name, age): ")
+            petIndex = pet.split(" ")
+            name = petIndex[0]
+            if name != "done":
+                age = petIndex[1]
+                Database.add_pet(name, age)
+                petCount = petCount + 1
+            else:
+
+                break
+        print(f"{petCount} pets added")
+    elif choice == "7":
+        break
+    else:
+        print("Invalid choice. Please try again.")
