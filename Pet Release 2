@@ -1,1 +1,83 @@
+class Pet:
+    def __init__(self, ID, name, age):
+        self.ID = ID
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"| {self.ID:<3} | {self.name:<10} | {self.age:<4}|"
+
+
+class PetDatabase:
+    def __init__(self):
+        self.pets = []
+
+    def add_pet(self, ID, name, age):
+        self.pets.append(Pet(ID, name, age))
+        print("Pet added successfully.")
+
+    def show_pets(self, pets=None):
+        if not pets:
+            pets = self.pets
+        print("+------------------------+")
+        print("| ID  | NAME       | AGE |")
+        print("+------------------------+")
+        for pet in pets:
+            print(f"{pet}")
+        print("+------------------------+")
+
+    def search_by_name(self, name):
+        matching_pets = [pet for pet in self.pets if pet.name.lower() == name.lower()]
+        if matching_pets:
+            self.show_pets(matching_pets)
+        else:
+            print("No pets found with that name.")
+
+    def search_by_age(self, age):
+        matching_pets = [pet for pet in self.pets if pet.age == age]
+        if matching_pets:
+            self.show_pets(matching_pets)
+        else:
+            print("No pets found with that age.")
+
+
+Database = PetDatabase()
+
+while True:
+    print("\nWhat would you like to do?")
+    print("1. View all pets")
+    print("2. Add more pets")
+    print("3. Search pets by name")
+    print("4. Search pets by age")
+    print("5. Exit Program")
+    choice = input("Enter your choice (1-5): ")
+    if choice == "1":
+        Database.show_pets()
+    elif choice == "2":
+        ID = 0
+        while True:
+            pet = input("add pet(name, age): ")
+            petIndex = pet.split(" ")
+            while petIndex[0] != "done":
+                name = petIndex[0]
+                age = int(petIndex[1])
+                Database.add_pet(ID, name, age)
+                ID = ID + 1
+                pet = input("add pet(name, age): ")
+                petIndex = pet.split(" ")
+            else:
+
+                break
+        print(f"{ID} pets added")
+    elif choice == "3":
+        name = input("Enter pet name to search for: ")
+        Database.search_by_name(name)
+    elif choice == "4":
+        age = int(input("Enter pet age to search for: "))
+        Database.search_by_age(age)
+    elif choice == "5":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
 
